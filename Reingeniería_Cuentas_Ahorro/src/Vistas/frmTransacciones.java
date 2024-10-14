@@ -270,7 +270,7 @@ public class frmTransacciones extends javax.swing.JFrame {
 
     private void JBDepositarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBDepositarMouseClicked
         try {
-            if (TFDepositar.getText().matches("\\d+\\.\\d+\\s*%?") && Double.parseDouble(TFDepositar.getText()) > 0) {
+            if (TFDepositar.getText().matches("\\d+(\\.\\d+)?") && Double.parseDouble(TFDepositar.getText()) > 0) {
                 cuenta.depositar(Double.parseDouble(TFDepositar.getText()));
                 //Generamos la estructura del movimiento:
                 Object[] movimiento = {"Depositar", getFechaMovimiento(), Double.valueOf(TFDepositar.getText()),
@@ -293,7 +293,7 @@ public class frmTransacciones extends javax.swing.JFrame {
 
     private void JBRetirarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBRetirarMouseClicked
         try {
-            if (TFRetirar.getText().matches("\\d+\\.\\d+\\s*%?") && Double.parseDouble(TFRetirar.getText()) > 0) {
+            if (TFRetirar.getText().matches("\\d+(\\.\\d+)?") && Double.parseDouble(TFRetirar.getText()) > 0) {
                 if (cuenta.retirar(Double.parseDouble(TFRetirar.getText())) == true) {
                     //Generamos la estructura del movimiento:
                     Object[] movimiento = {"Retirar", getFechaMovimiento(), Double.valueOf(TFRetirar.getText()),
@@ -387,5 +387,4 @@ public class frmTransacciones extends javax.swing.JFrame {
     private javax.swing.JTextField TFTasa;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    
 }

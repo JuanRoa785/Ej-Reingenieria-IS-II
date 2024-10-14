@@ -22,11 +22,9 @@ public class CuentaAhorros extends CuentaCorriente {
 
     @Override
     public void depositar(double consignacion) {
-        
         //double newBalance = this.getBalance() + (consignacion*(1+(tasaInteres/100))); // Da error: Probar 50 con tasa de 10%
         double newBalance = this.getBalance() + consignacion + (consignacion * (tasaInteres / 100));
         this.setBalance(newBalance);
-        
     }
 
 }
