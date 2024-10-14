@@ -160,12 +160,11 @@ public class frmInicio extends javax.swing.JFrame {
                 //Obtenemos la tasa
                 String tasaPorcentaje = TFTasa.getText().replace("%", "").trim();
                 Double tasa = Double.valueOf(tasaPorcentaje);
-                //System.out.println(tasa);
                 
-                //Cerramos la pestaña anterior
+                //Cerramos la pestaña actual
                 this.dispose();
                 
-                //En base a los datos creamos las respectivas cuentas con su ventana para hacer el Kardex
+                //En base a los datos creamos la ventana del Kardex con su respectiva cuenta:
                 if (RBCorriente.isSelected()) {
                     new frmTransacciones(0, tasa).setVisible(true); //0 = Cuenta Corriente
                 } else {
@@ -211,7 +210,7 @@ public class frmInicio extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmInicio().setVisible(true);;
+                new frmInicio().setVisible(true);
             }
         });
     }

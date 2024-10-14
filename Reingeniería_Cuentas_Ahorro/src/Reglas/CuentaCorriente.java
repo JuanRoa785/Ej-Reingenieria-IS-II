@@ -22,22 +22,24 @@ public class CuentaCorriente {
         balance = balance + consignacion;
     }
     
-    public void retirar(double retiro) {
+    public boolean retirar(double retiro) {
         if(balance >= retiro){
+         //balance = Math.round(balance - retiro);
             balance = round(balance - retiro, 5);
-            //balance = balance - retiro;
+            return true;
         }
         else{
              JOptionPane.showMessageDialog(null,
                         "¡No hay suficiente saldo en tu cuenta para retirar $" + String.valueOf(retiro) +"!" ,
                         "Saldo insuficiente",
                         JOptionPane.ERROR_MESSAGE);
+             return false;
         }
     }
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
-
+        
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();

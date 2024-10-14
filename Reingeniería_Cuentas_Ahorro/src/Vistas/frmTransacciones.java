@@ -273,7 +273,8 @@ public class frmTransacciones extends javax.swing.JFrame {
             if (TFDepositar.getText().matches("[0-9.]*") && Double.parseDouble(TFDepositar.getText()) > 0) {
                 cuenta.depositar(Double.parseDouble(TFDepositar.getText()));
                 //Generamos la estructura del movimiento:
-                Object[] movimiento = {"Depositar", getFechaMovimiento(), Double.valueOf(TFDepositar.getText()) , cuenta.getBalance(), TFTasa.getText()};
+                Object[] movimiento = {"Depositar", getFechaMovimiento(), Double.valueOf(TFDepositar.getText()),
+                    cuenta.getBalance(), TFTasa.getText()};
                 registrarMovimiento(movimiento);
             } else {
                 JOptionPane.showMessageDialog(null,
@@ -292,16 +293,13 @@ public class frmTransacciones extends javax.swing.JFrame {
 
     private void JBRetirarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBRetirarMouseClicked
         try {
-            if (Double.parseDouble(TFRetirar.getText()) > cuenta.getBalance()) {
-                cuenta.retirar(Double.parseDouble(TFRetirar.getText()));
-                reiniciarTextFields();
-                return;
-            }
             if (TFRetirar.getText().matches("[0-9.]*") && Double.parseDouble(TFRetirar.getText()) > 0) {
-                cuenta.retirar(Double.parseDouble(TFRetirar.getText()));
-                //Generamos la estructura del movimiento:
-                Object[] movimiento = {"Retirar", getFechaMovimiento(), Double.valueOf(TFRetirar.getText()), cuenta.getBalance(), TFTasa.getText()};
-                registrarMovimiento(movimiento);
+                if (cuenta.retirar(Double.parseDouble(TFRetirar.getText())) == true) {
+                    //Generamos la estructura del movimiento:
+                    Object[] movimiento = {"Retirar", getFechaMovimiento(), Double.valueOf(TFRetirar.getText()),
+                        cuenta.getBalance(), TFTasa.getText()};
+                    registrarMovimiento(movimiento);
+                }
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Error: El valor a retirar no es un número válido. Por favor, ingrese un número valido.",
@@ -323,14 +321,14 @@ public class frmTransacciones extends javax.swing.JFrame {
 
             // Escribir encabezados de las columnas
             for (int i = 0; i < model.getColumnCount(); i++) {
-                bw.write(model.getColumnName(i) + ","); 
+                bw.write(model.getColumnName(i) + ",");
             }
             bw.newLine();
 
             // Escribir los datos de las filas
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (int j = 0; j < model.getColumnCount(); j++) {
-                    bw.write(model.getValueAt(i, j).toString() + ","); 
+                    bw.write(model.getValueAt(i, j).toString() + ",");
                 }
                 bw.newLine();
             }
@@ -361,7 +359,7 @@ public class frmTransacciones extends javax.swing.JFrame {
         //Añadimos el movimiento a la tabla
         model.addRow(movimiento);
 
-        //Actualizamos el Balance y el valor a retirar.
+        //Actualizamos el Balance y los valores a Depositar o Retirar.
         TFBalance.setText(String.valueOf(cuenta.getBalance()));
         reiniciarTextFields();
     }
