@@ -156,7 +156,7 @@ public class frmInicio extends javax.swing.JFrame {
 
     private void JBCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBCrearMouseClicked
         try {
-            if (TFTasa.getText().matches("[0-9%. ]*")) {
+            if (TFTasa.getText().matches("\\d+\\.\\d+\\s*%?")) {
                 //Obtenemos la tasa
                 String tasaPorcentaje = TFTasa.getText().replace("%", "").trim();
                 Double tasa = Double.valueOf(tasaPorcentaje);
